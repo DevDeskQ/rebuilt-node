@@ -4,6 +4,8 @@ exports.up = async function(knex) {
        table.string('username').unique().notNullable();
        table.string('password').notNullable();
        table.string('email').notNullable();
+       table.string('role').defaultTo('student');
+       table.text('bio');
     });
     await knex.schema.createTable('categories', (table) => {
        table.increments('id');
@@ -14,6 +16,12 @@ exports.up = async function(knex) {
         table.string('title').notNullable();
         table.string('description').notNullable();
         table.string('tried').notNullable();
+        table.string('status').defaultTo('open')
+        table.integer('user_id')
+            .references('id')
+            .inTable('users')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE');
     });
     await knex.schema.createTable('answer', (table) => {
         table.increments('id');
@@ -21,6 +29,11 @@ exports.up = async function(knex) {
         table.integer('user_id')
             .references('id')
             .inTable('users')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE');
+        table.integer('ticket_id')
+            .references('id')
+            .inTable('ticket')
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
     });
@@ -35,25 +48,11 @@ exports.up = async function(knex) {
            .inTable('categories')
            .onUpdate('CASCADE')
            .onDelete('CASCADE');
-       table.primary(['ticket_id', 'category_id'])
-    });
-    await knex.schema.createTable('ticket_answer', (table) => {
-        table.integer('ticket_id')
-            .references('id')
-            .inTable('ticket')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE');
-        table.integer('answer_id')
-            .references('id')
-            .inTable('answer')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE');
-        table.primary(['ticket_id', 'answer_id'])
+       table.primary(['ticket_id', 'category_id']);
     });
 };
 
 exports.down = async function(knex) {
-    await knex.schema.dropTableIfExists('ticket_answer');
     await knex.schema.dropTableIfExists('ticket_category');
     await knex.schema.dropTableIfExists('answer');
     await knex.schema.dropTableIfExists('ticket');

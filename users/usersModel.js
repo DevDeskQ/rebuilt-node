@@ -1,4 +1,4 @@
-const hash = require('bcryptjs');
+const hash = require('bcrypt');
 const db = require('../data/config');
 
 module.exports = {
@@ -20,10 +20,16 @@ function find() {
     return db('users').select('id', 'username', 'email');
 }
 
-function findBy(filter) {
-    return db('users')
-        .select('id', 'username', 'email', 'password')
+async function findBy(filter) {
+    try {
+        return await db('users')
+        .select('*')
         .where(filter)
+        .first();
+    } catch (e) {
+        console.log(e)
+        return e
+    }
 }
 
 function findById(id) {

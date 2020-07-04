@@ -1,20 +1,22 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const userRouter = require('./users/usersRouter');
 const authRouter = require('./auth/authRouter');
+const ticketRouter = require('./tickets/ticketRouter');
+const cateRouter = require('./categories/categoriesRotuer');
 
 const server = express();
 const port = process.env.PORT || 5000;
 
 server.use(cors());
 server.use(helmet());
-server.use(cookieParser());
 server.use(express.json());
 
-server.use('/auth', authRouter);
-server.use('/user', userRouter);
+server.use('/api/auth', authRouter);
+server.use('/api/user', userRouter);
+server.use('/api/tickets', ticketRouter);
+server.use('/api/categories', cateRouter);
 
 server.get('/', (req, res) => {
    res.json({

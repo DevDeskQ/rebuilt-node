@@ -7,18 +7,16 @@ function restrict() {
 
     return async (req, res, next) => {
         try {
-            const { token } = req.cookies;
+            const token = req.headers.authorization;
                 if (!token) {
                     return res.status(401).json(authError)
                 }
-
-            jwt.verify(token, process.env.JWT_KEYCODE, (err, decoded) => {
+            jwt.verify(token, process.env.JWT_KEYCODE, (err) => {
                if (err) {
                    return res.status(401).json(authError)
                }
-               req.token = decoded;
-               next()
             });
+                next()
         } catch (e) {
             next(e)
         }

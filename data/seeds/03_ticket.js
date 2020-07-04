@@ -3,22 +3,28 @@ exports.seed = async function(knex) {
         {
             title: 'React Hooks',
             description: 'trying to make a custom hook',
-            tried: 'reading the docs, and watching videos'
+            tried: 'reading the docs, and watching videos',
+            status: "open",
+            user_id: 1
         },
         {
             title: 'CSS',
             description: 'flexbox hell',
-            tried: 'can not get items to line up'
+            tried: 'can not get items to line up',
+            status: "resolved",
+            user_id: 1
         },
         {
             title: 'express middle',
             description: 'trying to validate user',
-            tried: 'everything I can think of'
+            tried: 'everything I can think of',
+            user_id: 2
         },
         {
             title: 'redux',
             description: 'setting up reducers',
-            tried: 'to break out all user types'
+            tried: 'to break out all user types',
+            user_id: 2
         }
     ])
 };
