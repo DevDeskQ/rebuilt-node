@@ -18,7 +18,7 @@ module.exports = {
       directory: './data/seeds'
     }
   },
-  prod: {
+  production: {
     client: 'pg',
      connection: process.env.DATABASE_URL,
     migrations: {
