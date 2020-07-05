@@ -18,6 +18,17 @@ module.exports = {
       directory: './data/seeds'
     }
   },
+  prod: {
+    client: 'pg',
+     connection: process.env.HEROKU_URL,
+    useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
+  },
   test: {
     client: 'sqlite3',
     connection: {
