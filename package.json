@@ -21,6 +21,7 @@
     "bcrypt": "*",
     "cookie-parser": "*",
     "cors": "*",
+    "dotenv": "^8.2.0",
     "express": "*",
     "helmet": "*",
     "jsonwebtoken": "*",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "cross-env": "*",
-    "dotenv": "*",
     "jest": "*",
     "nodemon": "*",
     "supertest": "*"
