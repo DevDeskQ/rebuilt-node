@@ -14,11 +14,11 @@ server.use(cors());
 server.use(helmet());
 server.use(express.json());
 
-server.use('/api/auth', authRouter);
-server.use('/api/user', userRouter);
-server.use('/api/tickets', ticketRouter);
-server.use('/api/categories', cateRouter);
-server.use('/api/answer', answerRouter);
+server.use('/auth', authRouter);
+server.use('/user', userRouter);
+server.use('/tickets', ticketRouter);
+server.use('/categories', cateRouter);
+server.use('/answer', answerRouter);
 
 server.get('/', (req, res) => {
    res.json({
