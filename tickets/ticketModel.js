@@ -6,7 +6,9 @@ module.exports = {
     createTicket,
     findById,
     updateTicketCats,
-    getAll
+    getAll,
+    deleteTicket,
+    putTicket
 }
 
 async function getMyTickets(id) {
@@ -58,6 +60,26 @@ async function updateTicketCats(tic_id, cat_id) {
 async function getAll() {
     try {
         return await db('ticket')
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+async function deleteTicket(id) {
+    try {
+        return await db('ticket')
+            .where('id', id)
+            .del()
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+async function putTicket(id, data) {
+    try {
+        return await db('ticket')
+            .where('id', id)
+            .update(data)
     } catch (e) {
         console.log(e)
     }

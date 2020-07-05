@@ -154,10 +154,24 @@ router.get('/edit/:id', async (req, res, next) => {
 
 router.delete('/:id', restrict(), async (req, res, next) => {
    try {
-       console.log(req)
+       const { id } = req.body;
+       const deleteTicket = await helpers.deleteTicket(id);
+       res.status(204).json({
+           message: `Ticket id of ${id} has been deleted`
+       })
    } catch (e) {
        console.log(e)
    }
+});
+
+router.put('/:id', restrict(), async (req, res, next) => {
+   const { id } = req.params;
+   const data = req.body;
+   console.log(data)
+   const updateTicket = await helpers.putTicket(id, data);
+   res.json(202).json({
+       message: `Ticket id of ${id} has been updated`
+   })
 });
 
 module.exports = router;

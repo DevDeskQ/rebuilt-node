@@ -5,6 +5,7 @@ const userRouter = require('./users/usersRouter');
 const authRouter = require('./auth/authRouter');
 const ticketRouter = require('./tickets/ticketRouter');
 const cateRouter = require('./categories/categoriesRotuer');
+const answerRouter = require('./answer/answerRouter');
 
 const server = express();
 const port = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ server.use('/api/auth', authRouter);
 server.use('/api/user', userRouter);
 server.use('/api/tickets', ticketRouter);
 server.use('/api/categories', cateRouter);
+server.use('/api/answer', answerRouter);
 
 server.get('/', (req, res) => {
    res.json({
